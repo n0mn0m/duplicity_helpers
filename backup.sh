@@ -35,6 +35,8 @@ _days_between_full_backups=14
 
 ####################
 
+# systemctl stop docker
+
 ## Cleanup ##
 echo "cleaning up..."
 PASSPHRASE=${_pass} AWS_ACCESS_KEY_ID=${_access} AWS_SECRET_ACCESS_KEY=${_secret} $_duplicity cleanup --force --encrypt-key="${_gpg_key}" ${_target}
@@ -47,3 +49,4 @@ PASSPHRASE=${_pass} AWS_ACCESS_KEY_ID=${_access} AWS_SECRET_ACCESS_KEY=${_secret
 echo "Backing up files..."
 PASSPHRASE=${_pass} AWS_ACCESS_KEY_ID=${_access} AWS_SECRET_ACCESS_KEY=${_secret} $_duplicity --verbosity i --full-if-older-than 14D --encrypt-key="${_gpg_key}" --asynchronous-upload --exclude **.DS_Store ${_src} ${_target}
 
+# systemctl start docker
